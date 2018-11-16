@@ -8,19 +8,19 @@ print(sandlerdf)
 
 # início da questão (2) ---------------------------------
 # Encontre a média das notas (sem utilizar a função pronta do R).
-My.media <- function(lista) {  
-  retorno <- sum(lista) / length(lista)
+My.media <- function() {  
+  retorno <- sum(sandlerdf[["NOTAS"]]) / length(sandlerdf[["NOTAS"]])
   
   return(retorno)
 }
-print(My.media(sandlerdf[["NOTAS"]]))
+print(My.media())
 
 
 # início da questão (3) ---------------------------------
 # Encontre o desvio padrão das notas (sem utilizar a função pronta do R).
 My.dp <- function() {
   variancia = 0
-  media = My.media(sandlerdf[["NOTAS"]])
+  media = My.media()
   for(i in sandlerdf[["NOTAS"]]){
     variancia = variancia + ((i - media) ^ 2)
   }
@@ -29,7 +29,6 @@ My.dp <- function() {
   return(dp)
 }
 print(My.dp())
-print(sandlerdf[["NOTAS"]])
 
 
 # início da questão (4) ---------------------------------
@@ -79,16 +78,23 @@ print(extremos)
 # início da questão (8) ---------------------------------
 # Faça uma função que retorne o ano em que saíram mais filmes com notas acima de seis e meio (6,5).
 My.maisfilmes <- function() {
-  
+  # cria um df com o ano e a frequencia dele no dataframe dos filmes que tiveram nota maior que 6,5
+  contador <- count(sandlerdf[sandlerdf$NOTAS >= 6.5,], vars = "ANO")
+  # ordena o df e retorna o ano do primeiro resultado (o que teve mais ocorrências)
+  return(head(contador[order(contador$freq, decreasing = TRUE),]["ANO"], 1)[["ANO"]])
 }
+print(My.maisfilmes())
+
 
 # início da questão (9) ---------------------------------
 # Faça um histograma onde mostra a frequência de filmes com notas maiores ou iguais a seis de cada ano. 
 # Não esqueça de dar um título e fazer ele de forma colorida, facilitando a visualização. 
 
-
-
-
-
+barplot(table(sandlerdf[sandlerdf$NOTAS >= 6,]$ANO),
+        main="Frequência de filmes com notas maiores ou iguais a seis de cada ano",
+        xlab="Ano",
+        ylab = "Frequência",
+        col= colors()[grep("sky",colors())]
+        )
 
 
