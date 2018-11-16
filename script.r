@@ -8,6 +8,7 @@ print(sandlerdf)
 
 # início da questão (2) ---------------------------------
 # Encontre a média das notas (sem utilizar a função pronta do R).
+# A média é feita somando os valores das notas e dividindo pela quantidade de notas
 My.media <- function() {  
   retorno <- sum(sandlerdf[["NOTAS"]]) / length(sandlerdf[["NOTAS"]])
   
@@ -19,12 +20,15 @@ print(My.media())
 # início da questão (3) ---------------------------------
 # Encontre o desvio padrão das notas (sem utilizar a função pronta do R).
 My.dp <- function() {
+  # a variância é o somatório das diferenças entre o valor e a média elevado ao quadrado
+  # dividido pela quantidade de notas
   variancia = 0
   media = My.media()
   for(i in sandlerdf[["NOTAS"]]){
     variancia = variancia + ((i - media) ^ 2)
   }
   variancia <- variancia / length(sandlerdf[["NOTAS"]])
+  # o desvio padrão é a raiz quadrada da variância
   dp = sqrt(variancia)
   return(dp)
 }
@@ -89,7 +93,7 @@ print(My.maisfilmes())
 # início da questão (9) ---------------------------------
 # Faça um histograma onde mostra a frequência de filmes com notas maiores ou iguais a seis de cada ano. 
 # Não esqueça de dar um título e fazer ele de forma colorida, facilitando a visualização. 
-
+# filtra o dataframe por notas maiores que 6 e passa a coluna ano para o barplot
 barplot(table(sandlerdf[sandlerdf$NOTAS >= 6,]$ANO),
         main="Frequência de filmes com notas maiores ou iguais a seis de cada ano",
         xlab="Ano",
