@@ -1,4 +1,5 @@
 # Victor Miranda (vmm)
+# Thiago Lopes (thls)
 
 # início da questão (1) ---------------------------------
 #Descarregue o arquivo .csv da planilha e imprima o dataframe obtido exatamente do jeito que ele se encontra.
